@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kebijakan Privasi — WarungPro</title>
+<style>
+  :root { --daun: #17603a; --daun-tua: #0f3d26; --kunyit: #f2b705; --tinta: #17231c; --abu: #56655c; --latar: #eef3ef; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--tinta); background: var(--latar); line-height: 1.65; }
+  header { background: var(--daun-tua); color: #fff; padding: 28px 16px; }
+  header div { max-width: 760px; margin: 0 auto; }
+  header a { color: #fff; text-decoration: none; font-weight: 800; font-size: 1.3rem; } header a b { color: var(--kunyit); }
+  main { max-width: 760px; margin: 0 auto; padding: 24px 16px 48px; }
+  article { background: #fff; border-radius: 16px; padding: 24px 20px; }
+  h1 { margin-top: 0; color: var(--daun-tua); font-size: 1.6rem; }
+  h2 { color: var(--daun-tua); font-size: 1.15rem; margin-top: 28px; }
+  ul { padding-left: 20px; } li { margin: 4px 0; }
+  a { color: var(--daun); }
+  .kecil { color: var(--abu); font-size: .92rem; }
+</style>
+</head>
+<body>
+<header><div><a href="index.html">Warung<b>Pro</b></a></div></header>
+<main>
+<article>
+  <h1>Kebijakan Privasi WarungPro</h1>
+  <p class="kecil">Berlaku sejak 24 November 2026</p>
+
+  <p>Kebijakan ini menjelaskan data apa yang diakses aplikasi Android WarungPro ("aplikasi"), untuk apa, dan di mana data disimpan. WarungPro dirancang agar data warung tetap menjadi milik pemilik warung: pengembang tidak menjalankan server penyimpanan data dan tidak dapat melihat data Anda.</p>
+
+  <h2>1. Data yang diakses dari akun Google Anda</h2>
+  <p>Saat Anda memilih "Masuk dengan Google", aplikasi meminta izin berikut:</p>
+  <ul>
+    <li><b>Alamat email akun Google</b> (<code>userinfo.email</code>): untuk mengenali Anda, mencocokkan kode lisensi, dan membedakan pemilik dan kasir.</li>
+    <li><b>Google Sheets</b> (<code>spreadsheets</code>): untuk membuat dan memperbarui Google Sheet "WarungPro" yang menyimpan data warung Anda, serta membaca Sheet warung yang dibagikan pemilik kepada kasir.</li>
+    <li><b>Google Drive, hanya file yang dibuat aplikasi ini</b> (<code>drive.file</code>): untuk menemukan kembali Sheet WarungPro Anda saat memasang aplikasi di HP baru, dan untuk membagikan Sheet itu kepada kasir yang Anda undang. Aplikasi tidak dapat melihat file lain di Drive Anda.</li>
+  </ul>
+  <p>Aplikasi tidak meminta akses ke Gmail, kontak, foto, atau data Google lain.</p>
+
+  <h2>2. Data warung yang disimpan</h2>
+  <p>Data yang Anda masukkan (daftar barang, harga, stok, penjualan, barang masuk, nama warung, dan email kasir yang Anda undang) disimpan di dua tempat:</p>
+  <ul>
+    <li><b>Di HP Anda</b>, di penyimpanan internal aplikasi.</li>
+    <li><b>Di Google Sheet milik pemilik warung</b>, di Google Drive akun pemilik. Sheet ini dapat dibuka, diunduh, atau dihapus oleh pemilik kapan saja melalui Google Drive.</li>
+  </ul>
+  <p>Data tidak dikirim ke server pengembang atau pihak lain.</p>
+
+  <h2>3. Penggunaan data Google (Limited Use)</h2>
+  <p>Penggunaan dan pemindahan informasi yang diterima dari Google API oleh WarungPro mematuhi <a href="https://developers.google.com/terms/api-services-user-data-policy" rel="noopener">Kebijakan Data Pengguna Layanan Google API</a>, termasuk persyaratan Penggunaan Terbatas (Limited Use). Secara khusus:</p>
+  <ul>
+    <li>Data Google hanya dipakai untuk menjalankan fitur aplikasi yang terlihat oleh pengguna (menyimpan dan menyinkronkan data warung).</li>
+    <li>Data Google tidak dijual, tidak dipakai untuk iklan, dan tidak dipindahkan ke pihak lain.</li>
+    <li>Tidak ada manusia yang membaca data Google Anda, kecuali atas persetujuan Anda untuk keperluan bantuan teknis, atau jika diwajibkan hukum.</li>
+    <li>Data Google tidak dipakai untuk melatih model kecerdasan buatan.</li>
+  </ul>
+
+  <h2>4. Layanan pihak ketiga lain</h2>
+  <ul>
+    <li><b>Pemindai barcode</b> memakai Google ML Kit yang berjalan di HP Anda.</li>
+    <li><b>Pencarian nama barang</b>: saat barcode baru dipindai, aplikasi dapat mengirim <i>nomor barcode saja</i> ke Open Food Facts (openfoodfacts.org) untuk mencari nama produk. Fitur ini dapat dimatikan di Pengaturan → Barcode.</li>
+  </ul>
+
+  <h2>5. Kasir</h2>
+  <p>Jika pemilik mengundang kasir, Google Sheet warung dibagikan ke akun Google kasir tersebut dan kasir dapat membaca serta menambah data warung. Pemilik dapat mencabut akses kasir kapan saja di Pengaturan → Kasir.</p>
+
+  <h2>6. Menghapus data dan mencabut izin</h2>
+  <ul>
+    <li>Tombol <b>Keluar</b> di aplikasi menghapus data di HP tersebut.</li>
+    <li>Untuk menghapus seluruh data warung, hapus Google Sheet "WarungPro" dari Google Drive Anda.</li>
+    <li>Untuk mencabut izin aplikasi, buka <a href="https://myaccount.google.com/permissions" rel="noopener">myaccount.google.com/permissions</a> lalu hapus akses WarungPro.</li>
+  </ul>
+
+  <h2>7. Keamanan</h2>
+  <p>Komunikasi dengan Google memakai koneksi terenkripsi (HTTPS). Akses ke Google Sheet dilindungi oleh sistem izin akun Google.</p>
+
+  <h2>8. Anak-anak</h2>
+  <p>Aplikasi ditujukan untuk pemilik dan pegawai usaha, bukan untuk anak di bawah 13 tahun.</p>
+
+  <h2>9. Perubahan kebijakan</h2>
+  <p>Kebijakan ini dapat diperbarui. Tanggal berlaku di bagian atas akan diubah setiap ada pembaruan.</p>
+
+  <h2>10. Kontak</h2>
+  <p>Pertanyaan tentang privasi: <a href="mailto:rhemol.bsc@gmail.com">rhemol.bsc@gmail.com</a></p>
+</article>
+</main>
+</body>
+</html>
