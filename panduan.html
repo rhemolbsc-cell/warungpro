@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panduan WarungPro</title>
+<meta name="description" content="Panduan lengkap memakai WarungPro: pasang aplikasi, masuk, tambah barang, berjualan, barang masuk, laporan, kasir, dan Google Sheet.">
+<style>
+  :root { --daun: #17603a; --daun-tua: #0f3d26; --daun-muda: #e2efe6; --kunyit: #f2b705; --kunyit-muda: #fdf3cf; --sambal: #c2362b; --sambal-muda: #fbe4e1; --tinta: #17231c; --abu: #56655c; --latar: #eef3ef; --garis: #d6dfd9; }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: var(--tinta); background: var(--latar); line-height: 1.6; font-size: 17px; }
+  header.sampul { background: var(--daun-tua); color: #fff; padding: 44px 16px 40px; text-align: center; }
+  .merek { font-weight: 800; font-size: 2.4rem; letter-spacing: -0.01em; } .merek b { color: var(--kunyit); }
+  header.sampul h1 { margin: 6px 0 0; font-size: 1.5rem; font-weight: 700; }
+  header.sampul p { margin: 10px auto 0; max-width: 560px; opacity: .9; }
+  main { max-width: 900px; margin: 0 auto; padding: 24px 16px 56px; }
+  nav.isi { background: #fff; border-radius: 16px; padding: 18px 22px; margin-bottom: 20px; }
+  nav.isi h2 { margin: 0 0 8px; font-size: 1.1rem; color: var(--daun-tua); }
+  nav.isi ol { margin: 0; padding-left: 22px; columns: 2; column-gap: 32px; }
+  nav.isi li { margin: 3px 0; break-inside: avoid; }
+  a { color: var(--daun); }
+  section.bab { background: #fff; border-radius: 16px; padding: 24px 22px; margin-bottom: 20px; }
+  section.bab > h2 { margin: 0 0 6px; color: var(--daun-tua); font-size: 1.45rem; display: flex; align-items: center; gap: 12px; }
+  .nomor { flex: none; display: inline-grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--daun); color: #fff; font-size: 1.05rem; }
+  .intro { color: var(--abu); margin: 0 0 14px; }
+  .langkah { display: grid; grid-template-columns: 260px 1fr; gap: 24px; align-items: start; padding: 18px 0; border-top: 1px solid var(--garis); }
+  .langkah:first-of-type { border-top: 0; }
+  .langkah--tanpa-gambar { grid-template-columns: 1fr; }
+  figure { margin: 0; }
+  figure img { display: block; width: 100%; height: auto; border-radius: 22px; border: 6px solid #1d2a22; box-shadow: 0 6px 20px rgba(15, 61, 38, .18); background: #fff; }
+  figcaption { font-size: .85rem; color: var(--abu); text-align: center; margin-top: 6px; }
+  h3 { margin: 0 0 8px; font-size: 1.15rem; }
+  ol.urut, ul.titik { margin: 0 0 10px; padding-left: 22px; }
+  ol.urut li, ul.titik li { margin: 5px 0; }
+  .tombol { display: inline-block; padding: 0 8px; border-radius: 6px; background: var(--daun-muda); color: var(--daun-tua); font-weight: 700; white-space: nowrap; }
+  .kotak { border-radius: 12px; padding: 12px 14px; margin: 12px 0 0; }
+  .kotak--tips { background: var(--kunyit-muda); }
+  .kotak--penting { background: var(--sambal-muda); }
+  .kotak--info { background: var(--daun-muda); }
+  .kotak b:first-child { display: block; margin-bottom: 2px; }
+  table { border-collapse: collapse; width: 100%; margin: 8px 0 0; font-size: .95rem; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--garis); vertical-align: top; }
+  th { background: var(--latar); }
+  .lencana { display: inline-block; border-radius: 999px; padding: 1px 10px; font-weight: 700; font-size: .85rem; white-space: nowrap; }
+  .l-hijau { background: #1d4d33; color: #fff; } .l-kuning { background: #fdf0c4; color: #6b4f00; } .l-merah { background: var(--sambal); color: #fff; }
+  details { border-top: 1px solid var(--garis); padding: 12px 0; }
+  details:first-of-type { border-top: 0; }
+  summary { cursor: pointer; font-weight: 700; }
+  details p, details ul { margin: 8px 0 0; }
+  footer { text-align: center; color: var(--abu); font-size: .9rem; padding: 0 16px 36px; }
+  .kembali { display: inline-block; margin-top: 10px; font-size: .9rem; }
+  @media (max-width: 680px) {
+    body { font-size: 16px; }
+    nav.isi ol { columns: 1; }
+    .langkah { grid-template-columns: 1fr; gap: 14px; }
+    figure { max-width: 300px; margin: 0 auto; }
+  }
+  @media print {
+    body { background: #fff; font-size: 12pt; }
+    header.sampul { padding: 28px 16px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    main { padding: 0; max-width: none; }
+    nav.isi, section.bab { border: 1px solid var(--garis); }
+    section.bab { break-before: page; }
+    .langkah { break-inside: avoid; grid-template-columns: 220px 1fr; }
+    .kembali { display: none; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<header class="sampul">
+  <div class="merek">Warung<b>Pro</b></div>
+  <h1>Panduan Penggunaan</h1>
+  <p>Kasir, stok barang, dan laporan warung di HP Android. Data warung tersimpan otomatis di Google Sheet milik Anda sendiri.</p>
+</header>
+
+<main>
+  <nav class="isi" aria-label="Daftar isi">
+    <h2>Daftar isi</h2>
+    <ol>
+      <li><a href="#persiapan">Yang perlu disiapkan</a></li>
+      <li><a href="#pasang">Memasang aplikasi</a></li>
+      <li><a href="#masuk">Masuk pertama kali</a></li>
+      <li><a href="#beranda">Mengenal Beranda</a></li>
+      <li><a href="#barang">Menambah barang</a></li>
+      <li><a href="#kasir">Berjualan di Kasir</a></li>
+      <li><a href="#masuk-barang">Mencatat barang masuk</a></li>
+      <li><a href="#belanja">Daftar belanja</a></li>
+      <li><a href="#laporan">Laporan penjualan &amp; laba</a></li>
+      <li><a href="#sheet">Google Sheet &amp; sinkron otomatis</a></li>
+      <li><a href="#tambah-kasir">Menambah kasir</a></li>
+      <li><a href="#harga">Aturan harga jual</a></li>
+      <li><a href="#cadangan">Cadangan data</a></li>
+      <li><a href="#tanya">Pertanyaan &amp; masalah umum</a></li>
+    </ol>
+  </nav>
+
+  <!-- 1 -->
+  <section class="bab" id="persiapan">
+    <h2><span class="nomor">1</span>Yang perlu disiapkan</h2>
+    <ul class="titik">
+      <li><b>HP Android</b> versi 7 atau lebih baru.</li>
+      <li><b>Akun Google (Gmail)</b> yang sudah masuk di HP tersebut.</li>
+      <li><b>Internet</b> saat pertama kali masuk. Setelah itu aplikasi tetap bisa dipakai tanpa internet; data dikirim ke Google Sheet saat internet tersambung lagi.</li>
+      <li><b>Kode lisensi</b> dari penjual aplikasi (khusus pemilik warung). Kirim alamat Gmail Anda ke penjual, lalu Anda akan menerima kode yang diawali <code>WP1-</code>. Kode hanya berlaku untuk Gmail itu.</li>
+      <li><b>File aplikasi</b> <code>WarungPro.apk</code> dari penjual.</li>
+    </ul>
+    <div class="kotak kotak--info"><b>Kasir tidak perlu kode lisensi.</b> Kasir cukup diundang oleh pemilik warung (lihat bagian 11).</div>
+  </section>
+
+  <!-- 2 -->
+  <section class="bab" id="pasang">
+    <h2><span class="nomor">2</span>Memasang aplikasi</h2>
+    <p class="intro">Aplikasi dipasang dari file APK, bukan dari Play Store, jadi Android akan meminta izin dulu. Ini normal.</p>
+    <div class="langkah langkah--tanpa-gambar">
+      <div>
+        <ol class="urut">
+          <li>Buka file <b>WarungPro.apk</b> yang dikirim penjual (misalnya dari WhatsApp atau folder Download).</li>
+          <li>Jika muncul pesan <i>"Demi keamanan, HP Anda tidak diizinkan memasang aplikasi dari sumber ini"</i>, ketuk <span class="tombol">Setelan</span>, aktifkan <span class="tombol">Izinkan dari sumber ini</span>, lalu kembali.</li>
+          <li>Ketuk <span class="tombol">Instal</span>.</li>
+          <li>Jika muncul peringatan <b>Google Play Protect</b> ("Aplikasi tidak dikenal"), ketuk <span class="tombol">Detail selengkapnya</span> lalu <span class="tombol">Tetap instal</span>.</li>
+          <li>Setelah selesai, ketuk <span class="tombol">Buka</span>. Ikon WarungPro (gambar warung hijau-kuning) juga ada di layar HP.</li>
+        </ol>
+        <div class="kotak kotak--tips"><b>Memperbarui aplikasi</b>Jika penjual mengirim versi baru, cukup pasang file APK baru di atas yang lama. Data Anda tidak hilang.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="bab" id="masuk">
+    <h2><span class="nomor">3</span>Masuk pertama kali</h2>
+    <p class="intro">Hanya dilakukan sekali di setiap HP.</p>
+
+    <div class="langkah">
+      <figure><img src="panduan/gerbang-masuk.png" alt="Layar Masuk dengan Google" loading="lazy"><figcaption>Layar pertama</figcaption></figure>
+      <div>
+        <h3>a. Masuk dengan Google</h3>
+        <ol class="urut">
+          <li>Ketuk <span class="tombol">Masuk dengan Google</span> lalu pilih akun Gmail Anda.</li>
+          <li>Jika muncul layar <b>"Google belum memverifikasi aplikasi ini"</b>, ketuk <span class="tombol">Lanjutan</span> lalu <span class="tombol">Buka WarungPro (tidak aman)</span>. Ini normal untuk aplikasi baru dan tidak berbahaya.</li>
+          <li>Di layar izin, <b>centang semua izin</b> (Google Sheets dan Google Drive) lalu ketuk <span class="tombol">Lanjutkan</span>.</li>
+        </ol>
+        <div class="kotak kotak--penting"><b>Wajib centang semua izin.</b>Jika ada yang tidak dicentang, aplikasi akan menampilkan pesan "izin belum lengkap". Ulangi masuk dan centang semuanya.</div>
+      </div>
+    </div>
+
+    <div class="langkah">
+      <figure><img src="panduan/gerbang-peran.png" alt="Pilih peran pemilik atau kasir" loading="lazy"><figcaption>Pilih peran</figcaption></figure>
+      <div>
+        <h3>b. Pilih peran</h3>
+        <ul class="titik">
+          <li><b>Pemilik warung</b>: Anda yang membeli aplikasi dan punya kode lisensi.</li>
+          <li><b>Kasir</b>: Anda diundang pemilik warung dan punya kode undangan (lihat bagian 11).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="langkah">
+      <figure><img src="panduan/gerbang-lisensi.png" alt="Memasukkan kode lisensi" loading="lazy"><figcaption>Kode lisensi (contoh)</figcaption></figure>
+      <div>
+        <h3>c. Masukkan kode lisensi (pemilik)</h3>
+        <ol class="urut">
+          <li>Tempel kode lisensi dari penjual, mulai dari <code>WP1-</code> sampai habis.</li>
+          <li>Ketuk <span class="tombol">Aktifkan</span>.</li>
+          <li>Aplikasi membuat file <b>Google Sheet "WarungPro"</b> di Google Drive Anda. Semua data warung akan tersimpan di sana secara otomatis.</li>
+        </ol>
+        <div class="kotak kotak--tips"><b>Kode ditolak?</b>Pastikan Anda masuk dengan Gmail yang sama dengan yang dikirim ke penjual. Kode untuk satu Gmail tidak berlaku untuk Gmail lain.</div>
+        <div class="kotak kotak--info"><b>Ganti HP atau pasang ulang?</b>Masuk dengan Gmail yang sama dan masukkan kode yang sama. Aplikasi menemukan Google Sheet lama Anda dan mengambil semua data kembali.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="bab" id="beranda">
+    <h2><span class="nomor">4</span>Mengenal Beranda</h2>
+    <div class="langkah">
+      <figure><img src="panduan/beranda.png" alt="Layar Beranda" loading="lazy"><figcaption>Beranda</figcaption></figure>
+      <div>
+        <ul class="titik">
+          <li><b>Penjualan hari ini</b>: total uang masuk hari ini, jumlah transaksi, dan perbandingan dengan kemarin.</li>
+          <li><b>Laba kotor</b>: keuntungan hari ini (harga jual dikurangi harga beli).</li>
+          <li><b>Stok menipis</b>: jumlah barang yang perlu dibeli lagi. Ketuk untuk membuka daftar belanja.</li>
+          <li>Tombol cepat: <span class="tombol">Mulai jualan</span>, <span class="tombol">Catat barang masuk</span>, <span class="tombol">Daftar belanja</span>.</li>
+          <li><b>Transaksi terakhir</b> dan <b>stok yang perlu diperhatikan</b>.</li>
+          <li>Kanan atas: status penyimpanan ke Google Sheet (lihat bagian 10).</li>
+        </ul>
+        <p>Menu utama ada di bagian bawah: <b>Beranda, Kasir, Barang, Laporan, Pengaturan</b>. Angka merah di menu Barang adalah jumlah barang yang stoknya menipis.</p>
+        <div class="kotak kotak--tips"><b>Baru mulai?</b>Saat belum ada barang, Beranda menampilkan tombol <span class="tombol">Tambah barang</span> dan <span class="tombol">Muat barang contoh</span> untuk mencoba aplikasi dulu.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="bab" id="barang">
+    <h2><span class="nomor">5</span>Menambah barang</h2>
+    <div class="langkah">
+      <figure><img src="panduan/barang.png" alt="Daftar barang" loading="lazy"><figcaption>Barang → Daftar barang</figcaption></figure>
+      <div>
+        <h3>Daftar barang</h3>
+        <ol class="urut">
+          <li>Buka menu <b>Barang</b>, tab <b>Daftar barang</b>.</li>
+          <li>Ketuk <span class="tombol">+ Tambah</span> untuk barang baru, atau ketuk barang untuk mengubahnya.</li>
+          <li>Tombol bergambar barcode memindai barcode: jika barang sudah ada, langsung dibuka; jika belum, form barang baru terbuka dengan kode terisi.</li>
+        </ol>
+        <p>Garis merah di kiri berarti stok sudah di batas minimum atau habis.</p>
+      </div>
+    </div>
+    <div class="langkah">
+      <figure><img src="panduan/form.png" alt="Form barang" loading="lazy"><figcaption>Form tambah / ubah barang</figcaption></figure>
+      <div>
+        <h3>Mengisi form barang</h3>
+        <ul class="titik">
+          <li><b>Foto</b>: <span class="tombol">Ambil foto</span> memakai kamera, <span class="tombol">Galeri</span> memilih foto dari HP. Foto tampil di Kasir supaya barang mudah dikenali.</li>
+          <li><b>Kode / barcode</b>: ketik atau ketuk <span class="tombol">Pindai</span>. Untuk barang kemasan pabrik, nama dan fotonya sering terisi otomatis dari internet (periksa kembali).</li>
+          <li><b>Nama barang, kategori, satuan jual</b> (Pcs, Bungkus, Kg, Liter, dan lain-lain).</li>
+          <li><b>Beli per dus/renteng/slop?</b> Isi kemasan dan isinya (misal 1 Dus = 40 Pcs) serta harga beli per dus. Harga beli per Pcs dihitung otomatis.</li>
+          <li><b>Harga beli &amp; harga jual</b>. Aplikasi menampilkan <b>saran harga jual</b> sesuai untung kategori; ketuk <span class="tombol">Pakai</span> untuk memakainya.</li>
+          <li><b>Stok awal</b> dan <b>stok minimum</b>. Saat stok mencapai angka minimum, barang masuk ke daftar belanja.</li>
+        </ul>
+        <p>Ketuk <span class="tombol">Simpan barang</span>.</p>
+        <div class="kotak kotak--info"><b>Mengubah stok</b>Untuk barang yang sudah ada, ubah angka <b>Stok sekarang</b> (misalnya setelah menghitung ulang stok). Aplikasi mencatat selisihnya sebagai penyesuaian stok.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="bab" id="kasir">
+    <h2><span class="nomor">6</span>Berjualan di Kasir</h2>
+    <div class="langkah">
+      <figure><img src="panduan/kasir.png" alt="Layar Kasir" loading="lazy"><figcaption>Kasir</figcaption></figure>
+      <div>
+        <h3>a. Pilih barang</h3>
+        <ul class="titik">
+          <li><b>Ketuk kartu barang</b> untuk memasukkannya ke keranjang. Ketuk lagi untuk menambah jumlah. Angka kuning di pojok foto adalah jumlah di keranjang.</li>
+          <li>Cari dengan kolom <b>Cari barang</b>, atau saring dengan tombol kategori.</li>
+          <li>Tombol barcode di kanan atas memindai barcode barang dengan kamera. Alat scanner barcode USB/Bluetooth juga bisa dipakai di kolom cari.</li>
+          <li>Barang yang stoknya habis berwarna abu-abu dan tidak bisa dipilih.</li>
+        </ul>
+        <p>Ketuk bilah kuning <span class="tombol">Bayar</span> di bawah untuk membuka keranjang.</p>
+      </div>
+    </div>
+    <div class="langkah">
+      <figure><img src="panduan/keranjang.png" alt="Keranjang dan pembayaran" loading="lazy"><figcaption>Keranjang &amp; pembayaran</figcaption></figure>
+      <div>
+        <h3>b. Bayar</h3>
+        <ol class="urut">
+          <li>Periksa isi keranjang. Ubah jumlah dengan <span class="tombol">−</span> / <span class="tombol">+</span> atau ketik angkanya (bisa desimal, misalnya 0,5 kg).</li>
+          <li>Isi <b>Uang diterima</b>, atau ketuk tombol cepat seperti <span class="tombol">Uang pas</span>, <span class="tombol">Rp 20.000</span>. Kosongkan jika uangnya pas.</li>
+          <li><b>Kembalian</b> dihitung otomatis.</li>
+          <li>Ketuk <span class="tombol">Simpan penjualan</span>. Stok berkurang otomatis.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="langkah">
+      <figure><img src="panduan/sukses.png" alt="Penjualan tersimpan" loading="lazy"><figcaption>Penjualan tersimpan</figcaption></figure>
+      <div>
+        <h3>c. Struk</h3>
+        <ul class="titik">
+          <li>Setelah tersimpan, jumlah kembalian ditampilkan besar.</li>
+          <li><span class="tombol">Bagikan struk</span> mengirim struk ke WhatsApp pembeli atau ke aplikasi printer thermal yang mendukung teks.</li>
+          <li><span class="tombol">Transaksi baru</span> untuk melayani pembeli berikutnya.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section class="bab" id="masuk-barang">
+    <h2><span class="nomor">7</span>Mencatat barang masuk (belanja / restok)</h2>
+    <div class="langkah">
+      <figure><img src="panduan/masuk.png" alt="Barang masuk" loading="lazy"><figcaption>Barang → Barang masuk</figcaption></figure>
+      <div>
+        <ol class="urut">
+          <li>Buka <b>Barang</b> → tab <b>Barang masuk</b>.</li>
+          <li>Pilih barang (atau pindai barcode-nya).</li>
+          <li>Untuk barang yang punya kemasan, pilih <b>Dibeli per</b> Pcs atau Dus.</li>
+          <li>Isi <b>jumlah</b> dan <b>harga beli</b>. Aplikasi menampilkan stok baru, total belanja, dan harga beli rata-rata.</li>
+          <li>Jika harga kulakan naik, aplikasi menawarkan <b>menaikkan harga jual</b> agar untung tetap. Centang jika setuju.</li>
+          <li>Ketuk <span class="tombol">Catat barang masuk</span>. Stok bertambah otomatis.</li>
+        </ol>
+        <div class="kotak kotak--tips"><b>Harga beli rata-rata</b>Biarkan kotak "Hitung ulang harga beli dengan rata-rata" tercentang supaya laba dihitung dari harga beli terkini.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section class="bab" id="belanja">
+    <h2><span class="nomor">8</span>Daftar belanja</h2>
+    <div class="langkah">
+      <figure><img src="panduan/belanja.png" alt="Perlu dibeli" loading="lazy"><figcaption>Barang → Perlu dibeli</figcaption></figure>
+      <div>
+        <ul class="titik">
+          <li>Tab <b>Perlu dibeli</b> berisi barang yang stoknya di batas minimum atau habis, beserta saran jumlah beli dan perkiraan biayanya.</li>
+          <li><span class="tombol">Catat masuk</span> membuka form barang masuk yang sudah terisi.</li>
+          <li><span class="tombol">Bagikan daftar belanja</span> mengirim daftar ke WhatsApp, misalnya untuk dibawa ke toko grosir.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 -->
+  <section class="bab" id="laporan">
+    <h2><span class="nomor">9</span>Laporan penjualan &amp; laba</h2>
+    <div class="langkah">
+      <figure><img src="panduan/laporan.png" alt="Laporan penjualan" loading="lazy"><figcaption>Laporan → Penjualan</figcaption></figure>
+      <div>
+        <ul class="titik">
+          <li>Pilih periode: <span class="tombol">Hari ini</span>, <span class="tombol">7 hari</span>, <span class="tombol">Bulan ini</span>, <span class="tombol">Semua</span>, atau isi tanggal sendiri.</li>
+          <li>Ringkasan: <b>total penjualan, laba kotor, jumlah transaksi, margin</b>.</li>
+          <li>Setiap penjualan bisa <span class="tombol">Bagikan struk</span> atau <span class="tombol">Batalkan</span>. Membatalkan penjualan mengembalikan stoknya.</li>
+          <li>Penjualan oleh kasir ditandai dengan email kasirnya.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="langkah">
+      <figure><img src="panduan/laba.png" alt="Laba per barang" loading="lazy"><figcaption>Laporan → Laba per barang</figcaption></figure>
+      <div>
+        <ul class="titik">
+          <li><b>Laba per barang</b>: barang paling menguntungkan di atas.</li>
+          <li><b>Nilai stok</b>: total modal yang tersimpan dalam bentuk barang di warung.</li>
+        </ul>
+        <div class="kotak kotak--info"><b>Hanya pemilik</b>Menu Laporan tidak tampil di HP kasir.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section class="bab" id="sheet">
+    <h2><span class="nomor">10</span>Google Sheet &amp; sinkron otomatis</h2>
+    <div class="langkah">
+      <figure><img src="panduan/pengaturan.png" alt="Pengaturan akun dan Google Sheet" loading="lazy"><figcaption>Pengaturan → Akun &amp; Google Sheet</figcaption></figure>
+      <div>
+        <p>Semua data otomatis tersimpan di <b>Google Sheet "WarungPro"</b> di Google Drive Anda. Tidak perlu menekan tombol apa pun.</p>
+        <ul class="titik">
+          <li>Perubahan dikirim beberapa detik setelah Anda berjualan atau mengubah barang.</li>
+          <li>Perubahan dari HP lain (misalnya HP kasir) diambil setiap beberapa menit dan setiap aplikasi dibuka.</li>
+          <li>Tanpa internet, aplikasi tetap jalan normal; data dikirim saat internet tersambung lagi.</li>
+        </ul>
+        <h3>Arti status di kanan atas</h3>
+        <table>
+          <tr><th>Status</th><th>Arti</th></tr>
+          <tr><td><span class="lencana l-hijau">Tersimpan</span></td><td>Semua data sudah sama dengan Google Sheet.</td></tr>
+          <tr><td><span class="lencana l-kuning">Menunggu</span></td><td>Ada perubahan yang akan dikirim sebentar lagi.</td></tr>
+          <tr><td><span class="lencana l-kuning">Offline</span></td><td>Tidak ada internet. Data aman di HP dan dikirim nanti.</td></tr>
+          <tr><td><span class="lencana l-merah">Sinkron gagal</span> / <span class="lencana l-merah">Perlu login</span></td><td>Buka Pengaturan untuk melihat pesannya. Coba <span class="tombol">Sinkron sekarang</span> atau <span class="tombol">Masuk ulang ke Google</span>.</td></tr>
+        </table>
+        <ul class="titik" style="margin-top:12px">
+          <li><span class="tombol">Buka Google Sheet</span> membuka data Anda di aplikasi Google Sheets.</li>
+          <li><span class="tombol">Keluar</span> menghapus data dari HP ini saja. Data tetap aman di Google Sheet dan kembali saat Anda masuk lagi.</li>
+        </ul>
+        <div class="kotak kotak--penting"><b>Jangan mengubah isi Google Sheet secara manual</b>Jangan mengurutkan, menghapus, atau mengedit baris di Sheet. Lihat saja datanya; ubah data lewat aplikasi.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 -->
+  <section class="bab" id="tambah-kasir">
+    <h2><span class="nomor">11</span>Menambah kasir</h2>
+    <p class="intro">Kasir memakai HP dan akun Google sendiri. Penjualan kasir langsung masuk ke Google Sheet dan HP pemilik.</p>
+    <div class="langkah">
+      <figure><img src="panduan/kasir-panel.png" alt="Pengaturan Kasir" loading="lazy"><figcaption>Pengaturan → Kasir (di HP pemilik)</figcaption></figure>
+      <div>
+        <h3>a. Di HP pemilik</h3>
+        <ol class="urut">
+          <li>Buka <b>Pengaturan</b> → bagian <b>Kasir</b>.</li>
+          <li>Ketik <b>Gmail kasir</b>, lalu ketuk <span class="tombol">Undang</span>.</li>
+          <li>Muncul <b>QR dan kode undangan</b>. Tunjukkan QR ke HP kasir atau ketuk <span class="tombol">Bagikan kode</span> untuk mengirimnya lewat WhatsApp.</li>
+        </ol>
+        <p>Untuk menghentikan kasir (misalnya sudah tidak bekerja), ketuk <span class="tombol">Cabut akses</span>. HP kasir itu tidak bisa membuka data warung lagi begitu tersambung internet (paling lambat beberapa menit).</p>
+      </div>
+    </div>
+    <div class="langkah">
+      <figure><img src="panduan/undangan.png" alt="QR undangan kasir" loading="lazy"><figcaption>QR &amp; kode undangan</figcaption></figure>
+      <div>
+        <h3>b. Di HP kasir</h3>
+        <ol class="urut">
+          <li>Pasang WarungPro (bagian 2).</li>
+          <li><span class="tombol">Masuk dengan Google</span> memakai <b>Gmail yang diundang</b>.</li>
+          <li>Pilih <b>Kasir</b>.</li>
+          <li>Ketuk tombol barcode untuk <b>memindai QR</b>, atau tempel kode undangan (diawali <code>WPK1-</code>).</li>
+          <li>Ketuk <span class="tombol">Gabung ke warung</span>.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="langkah">
+      <figure><img src="panduan/gerbang-kasir.png" alt="Gabung sebagai kasir" loading="lazy"><figcaption>Layar gabung kasir</figcaption></figure>
+      <div>
+        <h3>Yang bisa dilakukan kasir</h3>
+        <table>
+          <tr><th>Boleh</th><th>Tidak boleh</th></tr>
+          <tr><td>Berjualan dan bagikan struk</td><td>Melihat laporan &amp; laba</td></tr>
+          <tr><td>Menambah &amp; mengubah barang, termasuk foto</td><td>Menghapus barang</td></tr>
+          <tr><td>Mencatat barang masuk</td><td>Membatalkan penjualan</td></tr>
+          <tr><td>Melihat daftar belanja</td><td>Mengubah pengaturan, harga, dan kasir lain</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 -->
+  <section class="bab" id="harga">
+    <h2><span class="nomor">12</span>Aturan harga jual</h2>
+    <div class="langkah">
+      <figure><img src="panduan/harga.png" alt="Aturan harga jual" loading="lazy"><figcaption>Pengaturan → Aturan harga jual</figcaption></figure>
+      <div>
+        <ul class="titik">
+          <li><b>Untung umum (%)</b>: target untung dari harga beli untuk semua barang.</li>
+          <li><b>Untung per kategori</b>: misalnya rokok 5%, sembako 8%, makanan ringan 20%. Kosongkan untuk memakai angka bawaan berwarna abu-abu.</li>
+          <li><b>Pembulatan</b>: harga dibulatkan ke atas ke Rp 100, Rp 500, atau Rp 1.000 supaya mudah memberi kembalian.</li>
+          <li>Di bawahnya tampil barang yang <b>untungnya di bawah target</b>. Ketuk tombol harganya untuk menyesuaikan, atau <span class="tombol">Pakai semua saran harga</span>.</li>
+        </ul>
+        <p>Aturan ini dipakai untuk saran harga saat menambah barang dan saat barang masuk.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 -->
+  <section class="bab" id="cadangan">
+    <h2><span class="nomor">13</span>Cadangan data</h2>
+    <div class="langkah">
+      <figure><img src="panduan/cadangan.png" alt="Cadangan data" loading="lazy"><figcaption>Pengaturan → Cadangan data</figcaption></figure>
+      <div>
+        <p>Data sudah otomatis aman di Google Sheet. File cadangan adalah salinan tambahan.</p>
+        <ul class="titik">
+          <li><span class="tombol">Simpan cadangan</span> membuat file cadangan; simpan ke Google Drive atau kirim ke WhatsApp sendiri.</li>
+          <li><span class="tombol">Pulihkan dari cadangan</span> mengganti data di HP dengan isi file cadangan.</li>
+        </ul>
+        <h3>Barcode</h3>
+        <p>Di bagian <b>Barcode</b> Anda bisa mematikan pencarian nama &amp; foto barang dari internet (Open Food Facts) jika tidak diperlukan.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14 -->
+  <section class="bab" id="tanya">
+    <h2><span class="nomor">14</span>Pertanyaan &amp; masalah umum</h2>
+    <details open>
+      <summary>Muncul "Akses diblokir" atau "Google belum memverifikasi aplikasi ini" saat masuk.</summary>
+      <p>Untuk "belum memverifikasi": ketuk <span class="tombol">Lanjutan</span> lalu <span class="tombol">Buka WarungPro</span>. Untuk "Akses diblokir": hubungi penjual aplikasi.</p>
+    </details>
+    <details>
+      <summary>Kode lisensi ditolak.</summary>
+      <p>Pastikan Gmail yang dipakai masuk sama persis dengan Gmail yang Anda kirim ke penjual. Tempel kode lengkap mulai dari <code>WP1-</code>. Untuk ganti akun, ketuk <span class="tombol">Ganti akun Google</span>.</p>
+    </details>
+    <details>
+      <summary>Kasir tidak bisa gabung: "belum diundang ke warung ini".</summary>
+      <p>Pastikan pemilik mengundang Gmail yang sama dengan yang dipakai kasir untuk masuk, lalu coba lagi.</p>
+    </details>
+    <details>
+      <summary>Data di HP kasir dan HP pemilik berbeda.</summary>
+      <p>Tunggu beberapa menit dengan internet menyala, atau buka <b>Pengaturan</b> lalu ketuk <span class="tombol">Sinkron sekarang</span> di kedua HP.</p>
+    </details>
+    <details>
+      <summary>Stok jadi minus.</summary>
+      <p>Bisa terjadi jika dua HP menjual barang yang sama hampir bersamaan saat stok tinggal sedikit. Catat barang masuk atau ubah angka stok di form barang.</p>
+    </details>
+    <details>
+      <summary>Pemindai barcode tidak mau terbuka.</summary>
+      <p>Pemakaian pertama mengunduh modul pemindai dari Google dan butuh internet. Tunggu sebentar lalu coba lagi.</p>
+    </details>
+    <details>
+      <summary>HP hilang, rusak, atau ganti HP.</summary>
+      <p>Pasang WarungPro di HP baru, masuk dengan Gmail yang sama, pilih Pemilik warung, dan masukkan kode lisensi yang sama. Semua data diambil kembali dari Google Sheet. Jika HP kasir hilang, cabut aksesnya di Pengaturan → Kasir.</p>
+    </details>
+    <details>
+      <summary>Bagaimana cara mencetak struk?</summary>
+      <p>Ketuk <span class="tombol">Bagikan struk</span> lalu pilih aplikasi printer thermal Bluetooth yang mendukung cetak teks (banyak tersedia di Play Store).</p>
+    </details>
+  </section>
+</main>
+
+<footer>
+  Butuh bantuan? Hubungi <a href="mailto:rhemol.bsc@gmail.com">rhemol.bsc@gmail.com</a><br>
+  <a href="index.html" class="kembali">← Kembali ke halaman WarungPro</a> &middot; <a href="privasi.html" class="kembali">Kebijakan Privasi</a>
+</footer>
+</body>
+</html>
